@@ -73,9 +73,9 @@ enum ServiceManager {
             throw ServiceManagerError.staleInstallation(installedAppURL.path)
         }
 
-        let sourceService = sourceAppURL
-            .appendingPathComponent("Contents/MacOS/WatchFolderService")
-        guard fileManager.isExecutableFile(atPath: sourceService.path) else {
+        let sourceExecutable = sourceAppURL
+            .appendingPathComponent("Contents/MacOS/WatchFolder")
+        guard fileManager.isExecutableFile(atPath: sourceExecutable.path) else {
             throw ServiceManagerError.serviceExecutableMissing
         }
 
@@ -91,10 +91,14 @@ enum ServiceManager {
             try fileManager.copyItem(at: sourceAppURL, to: installedAppURL)
 
             let serviceExecutable = installedAppURL
-                .appendingPathComponent("Contents/MacOS/WatchFolderService")
+                .appendingPathComponent("Contents/MacOS/WatchFolder")
             let plist: [String: Any] = [
                 "Label": label,
-                "ProgramArguments": [serviceExecutable.path, folder.standardizedFileURL.path],
+                "ProgramArguments": [
+                    serviceExecutable.path,
+                    "--background-service",
+                    folder.standardizedFileURL.path
+                ],
                 "RunAtLoad": false,
                 "KeepAlive": false,
                 "StandardOutPath": supportDirectory.appendingPathComponent("service.log").path,

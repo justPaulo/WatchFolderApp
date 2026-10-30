@@ -15,14 +15,12 @@ fi
 
 echo "==> Compiling (release, arm64)"
 swift build -c release --arch arm64 --product "$APP_NAME"
-swift build -c release --arch arm64 --product "WatchFolderService"
 BIN_DIR="$(swift build -c release --arch arm64 --show-bin-path)"
 
 echo "==> Assembling $APP"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN_DIR/$APP_NAME" "$APP/Contents/MacOS/$APP_NAME"
-cp "$BIN_DIR/WatchFolderService" "$APP/Contents/MacOS/WatchFolderService"
 cp "Resources/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 
 cat > "$APP/Contents/Info.plist" <<EOF
@@ -51,6 +49,5 @@ codesign --force --sign - "$APP"
 
 echo "==> Verifying architecture"
 lipo -archs "$APP/Contents/MacOS/$APP_NAME"
-lipo -archs "$APP/Contents/MacOS/WatchFolderService"
 
 echo "Done: $APP   (open it with: open $APP)"

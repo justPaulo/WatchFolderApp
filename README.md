@@ -43,9 +43,9 @@ To run the executable directly for development (without the packaged app):
 swift run WatchFolder
 ```
 
-The build script compiles the app and background-service executables for arm64,
-assembles the app bundle with `Resources/AppIcon.icns`, and ad-hoc signs it. It
-recreates `build/WatchFolder.app` when run.
+The build script compiles the app for arm64, assembles the app bundle with
+`Resources/AppIcon.icns`, and ad-hoc signs it. It recreates
+`build/WatchFolder.app` when run.
 
 ## Use
 
@@ -56,10 +56,13 @@ recreates `build/WatchFolder.app` when run.
 
 Watching still works if notifications are unavailable or declined; the app displays a notice and continues logging events.
 
-Use **Install** to install a per-user LaunchAgent that immediately continues
-watching the selected folder after the app closes. The app asks for notification
-permission if needed and explains why it is closing before it exits. **Uninstall**
-stops and removes the service and its app copy. The service does not resume
+Use **Install** to install a per-user LaunchAgent that runs the app's primary
+executable in background-service mode and immediately watches the selected
+folder after the app closes. Using the primary app executable allows macOS to
+associate service notifications with WatchFolder. The app asks for notification
+permission if needed and explains why it is closing before it exits. Reopening
+the app while the service is installed shows and refreshes the shared event log.
+**Uninstall** stops and removes the service and its app copy. The service does not resume
 monitoring automatically at the next login. After logging in again, use
 **Uninstall** and then **Install** to start it again.
 

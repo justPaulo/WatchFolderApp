@@ -1,3 +1,4 @@
+import Darwin
 import SwiftUI
 import AppKit
 import UserNotifications
@@ -35,6 +36,9 @@ final class WatchViewModel: ObservableObject {
             guard let self else { return }
             self.isServiceInstalled = ServiceManager.isInstalled
             self.isCheckingService = false
+            if self.isServiceInstalled {
+                self.refreshServiceLog()
+            }
         }
     }
 
@@ -143,6 +147,20 @@ final class WatchViewModel: ObservableObject {
             } catch {
                 errorMessage = "Could not uninstall background service: \(error.localizedDescription)"
             }
+        }
+    }
+
+    func refreshServiceLog() {
+        guard isServiceInstalled, let folder else { return }
+        let logURL = folder.appendingPathComponent(logFileName)
+        do {
+            let contents = try String(contentsOf: logURL, encoding: .utf8)
+            let lines = contents.components(separatedBy: .newlines)
+                .filter { !$0.isEmpty }
+                .suffix(500)
+            entries = lines.map { LogEntry(text: $0) }
+        } catch {
+            errorMessage = "Could not read the background service log: \(error.localizedDescription)"
         }
     }
 
@@ -302,10 +320,24 @@ struct ContentView: View {
         } message: {
             Text(model.serviceInstalledAlertMessage)
         }
+        .task(id: model.isServiceInstalled) {
+            guard model.isServiceInstalled else { return }
+            model.refreshServiceLog()
+            while !Task.isCancelled {
+                do {
+                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                } catch {
+                    return
+                }
+                model.refreshServiceLog()
+            }
+        }
     }
 }
 
 final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
+    private var backgroundService: BackgroundServiceRuntime?
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         if let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"),
            let icon = NSImage(contentsOf: iconURL) {
@@ -314,6 +346,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
             NSLog("WatchFolder: could not load AppIcon.icns from the app bundle.")
         }
         UNUserNotificationCenter.current().delegate = self
+        if let folder = WatchFolderApp.backgroundServiceFolder {
+            NSApplication.shared.setActivationPolicy(.accessory)
+            DispatchQueue.main.async {
+                NSApplication.shared.hide(nil)
+            }
+            let service = BackgroundServiceRuntime()
+            do {
+                try service.start(folder: folder)
+                backgroundService = service
+            } catch {
+                fputs("Could not start WatchFolder background service: \(error.localizedDescription)\n",
+                      stderr)
+                exit(EXIT_FAILURE)
+            }
+        }
     }
 
     func userNotificationCenter(
@@ -331,7 +378,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
 struct WatchFolderApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
 
+    static var backgroundServiceFolder: URL? {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let index = arguments.firstIndex(of: "--background-service"),
+              arguments.indices.contains(index + 1) else {
+            return nil
+        }
+        return URL(fileURLWithPath: arguments[index + 1], isDirectory: true)
+    }
+
     var body: some Scene {
-        WindowGroup("WatchFolder") { ContentView() }
+        WindowGroup("WatchFolder") {
+            if Self.backgroundServiceFolder != nil {
+                EmptyView()
+            } else {
+                ContentView()
+            }
+        }
     }
 }
