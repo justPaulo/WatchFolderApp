@@ -255,14 +255,6 @@ struct ContentView: View {
                 }
                 Button("Reveal Log") { model.revealLog() }.disabled(model.folder == nil)
                 Button("Clear") { model.entries.removeAll() }.disabled(model.entries.isEmpty)
-                Spacer()
-                if !model.isServiceInstalled {
-                    Label(model.isWatching ? "Watching" : (model.isStarting ? "Starting" : "Idle"),
-                          systemImage: model.isWatching ? "eye.fill" : "eye.slash")
-                        .foregroundStyle(model.isWatching ? .green : .secondary)
-                }
-            }
-            HStack {
                 Button(model.isServiceActionInProgress && !model.isServiceInstalled
                        ? "Installing…" : "Install") {
                     model.installService()
@@ -278,9 +270,17 @@ struct ContentView: View {
                           || model.isServiceActionInProgress)
                 if model.isCheckingService {
                     ProgressView().controlSize(.small)
-                    Text("Checking service…").foregroundStyle(.secondary)
                 }
                 Spacer()
+                if model.isCheckingService {
+                    Text("Checking service…").foregroundStyle(.secondary)
+                } else if model.isServiceInstalled {
+                    Text("Background service installed").foregroundStyle(.secondary)
+                } else {
+                    Label(model.isWatching ? "Watching" : (model.isStarting ? "Starting" : "Idle"),
+                          systemImage: model.isWatching ? "eye.fill" : "eye.slash")
+                        .foregroundStyle(model.isWatching ? .green : .secondary)
+                }
             }
             if let error = model.errorMessage {
                 Text(error).foregroundStyle(.red).font(.callout)

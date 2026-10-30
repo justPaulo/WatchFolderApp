@@ -11,6 +11,15 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>MacOS/WatchFolderService</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			iBGa9hc24iGOpgCN/fU4jkQmn6k=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"88119af61736e2218ea6008dfdf5388e44269fa9"</string>
+		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
 			<key>hash2</key>
