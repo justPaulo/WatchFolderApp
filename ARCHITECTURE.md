@@ -11,6 +11,9 @@ flowchart TD
     VM -->|choose folder / start / stop| AppKit[NSOpenPanel and app lifecycle]
     VM -->|request notification permission| Notifications[UserNotifications]
     VM -->|start monitor| Monitor[FolderMonitor]
+    VM -->|install / uninstall| Service[LaunchAgent]
+    Service -->|launch background executable| ServiceMonitor[WatchFolderService]
+    ServiceMonitor --> Monitor
 
     subgraph Core[WatchFolderCore]
         Monitor -->|initial scan and every 0.5 seconds| Scanner[FolderScanner]
@@ -33,7 +36,9 @@ flowchart TD
 | Component | Responsibility |
 | --- | --- |
 | `ContentView` | Presents folder selection, watch controls, status, errors, and the live event list. |
-| `WatchViewModel` | Owns UI state and the monitor lifecycle; requests notification authorization and posts notifications when enabled. |
+| `WatchViewModel` | Owns UI state and the monitor lifecycle; requests notification authorization, posts notifications when enabled, and manages the background service. |
+| `WatchFolderService` | Runs the folder monitor and event notifications in a separate process while the app window is closed. |
+| `ServiceManager` | Installs and removes the per-user LaunchAgent and its private app-bundle copy. |
 | `FolderMonitor` | Validates and starts a watch, schedules scans on a serial dispatch queue, writes events, and delivers callbacks on the main queue. |
 | `FolderScanner` | Recursively snapshots regular files and ordinary directories using relative paths, device/inode identity, size, and modification time. Packages are treated as atomic entries. |
 | `FileTracker` | Diffs two snapshots, pairs removed and added paths with matching identity as renames, and detects modifications at unchanged paths. |
@@ -48,6 +53,7 @@ flowchart TD
 4. Every 0.5 seconds, the monitor scans again and compares the new snapshot with the previous one.
 5. Each detected event is appended to the log. Event callbacks are dispatched to the main queue for the UI and, if authorized, a user notification.
 6. On stop or scan/log failure, the timer is cancelled and the folder lock is released. Errors are surfaced to the UI.
+7. Installing the LaunchAgent starts a separate monitor for the selected folder and closes the GUI after confirmation. The agent is not configured to restart monitoring automatically at login.
 
 ## Change detection notes
 

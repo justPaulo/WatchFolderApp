@@ -15,15 +15,26 @@ final class WatchViewModel: ObservableObject {
     @Published var isWatching = false
     @Published var isStarting = false
     @Published var errorMessage: String?
+    @Published var isCheckingService = true
+    @Published var isServiceInstalled = false
+    @Published var isServiceActionInProgress = false
+    @Published var showServiceInstalledAlert = false
+    @Published var serviceInstalledAlertMessage = ""
 
     private var monitor: FolderMonitor?
     private var startTask: Task<Void, Never>?
     private var startGeneration = 0
+    private var pendingServiceError: String?
     private let defaultsKey = "lastFolderPath"
 
     init() {
         if let path = UserDefaults.standard.string(forKey: defaultsKey) {
             folder = URL(fileURLWithPath: path)
+        }
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            self.isServiceInstalled = ServiceManager.isInstalled
+            self.isCheckingService = false
         }
     }
 
@@ -82,9 +93,82 @@ final class WatchViewModel: ObservableObject {
     private static let notificationsDisabledMessage =
         "Watching, but notifications are disabled. Enable alerts for WatchFolder in System Settings > Notifications."
 
+    func installService() {
+        guard let folder, !isCheckingService, !isServiceInstalled,
+              !isServiceActionInProgress, !isStarting else { return }
+        guard Bundle.main.bundleURL.pathExtension == "app" else {
+            errorMessage = "Install the background service from the packaged WatchFolder.app."
+            return
+        }
+        errorMessage = nil
+        isServiceActionInProgress = true
+        Task {
+            defer { isServiceActionInProgress = false }
+            let notificationIssue = await requestServiceNotifications()
+            let wasWatching = isWatching
+            if wasWatching { stop() }
+            do {
+                let appURL = Bundle.main.bundleURL
+                try await Task.detached(priority: .userInitiated) {
+                    try ServiceManager.install(folder: folder, from: appURL)
+                }.value
+                isServiceInstalled = true
+                let notificationNote = notificationIssue.map { "\n\n\($0)" } ?? ""
+                serviceInstalledAlertMessage =
+                    "Background monitoring of \(folder.path) has started. This window will close because the service now runs independently. Use Uninstall to stop and remove it. The service will not restart automatically after logout or restart.\(notificationNote)"
+                showServiceInstalledAlert = true
+            } catch {
+                let message = "Could not install background service: \(error.localizedDescription)"
+                if wasWatching {
+                    pendingServiceError = message
+                    start()
+                } else {
+                    errorMessage = message
+                }
+            }
+        }
+    }
+
+    func uninstallService() {
+        guard !isCheckingService, isServiceInstalled, !isServiceActionInProgress else { return }
+        errorMessage = nil
+        isServiceActionInProgress = true
+        Task {
+            defer { isServiceActionInProgress = false }
+            do {
+                try await Task.detached(priority: .userInitiated) {
+                    try ServiceManager.uninstall()
+                }.value
+                isServiceInstalled = false
+            } catch {
+                errorMessage = "Could not uninstall background service: \(error.localizedDescription)"
+            }
+        }
+    }
+
+    private func requestServiceNotifications() async -> String? {
+        let center = UNUserNotificationCenter.current()
+        do {
+            let settings = await center.notificationSettings()
+            switch settings.authorizationStatus {
+            case .authorized, .provisional, .ephemeral:
+                return nil
+            case .notDetermined:
+                let enabled = try await center.requestAuthorization(options: [.alert])
+                return enabled ? nil : Self.notificationsDisabledMessage
+            default:
+                return Self.notificationsDisabledMessage
+            }
+        } catch {
+            return "Could not enable notifications: \(error.localizedDescription)"
+        }
+    }
+
     private func startMonitoring(_ folder: URL, notificationsEnabled: Bool,
                                 notificationIssue: String?) {
-        errorMessage = notificationIssue
+        let issues = [pendingServiceError, notificationIssue].compactMap { $0 }
+        errorMessage = issues.isEmpty ? nil : issues.joined(separator: "\n")
+        pendingServiceError = nil
         let m = FolderMonitor(
             folder: folder,
             onEvent: { [weak self] event, line in
@@ -151,25 +235,52 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Button("Choose Folder…") { model.chooseFolder() }
+                    .disabled(model.isServiceInstalled || model.isServiceActionInProgress)
                 Text(model.folder?.path ?? "No folder selected")
                     .lineLimit(1).truncationMode(.middle)
                     .foregroundStyle(.secondary)
                 Spacer()
             }
             HStack {
-                if model.isWatching {
+                if model.isServiceInstalled {
+                    Text("Background service installed")
+                        .foregroundStyle(.secondary)
+                } else if model.isWatching {
                     Button("Stop") { model.stop() }
+                        .disabled(model.isServiceActionInProgress)
                 } else {
                     Button(model.isStarting ? "Starting…" : "Start Watching") { model.start() }
-                        .disabled(model.folder == nil || model.isStarting)
+                        .disabled(model.folder == nil || model.isStarting || model.isServiceActionInProgress)
                         .keyboardShortcut(.defaultAction)
                 }
                 Button("Reveal Log") { model.revealLog() }.disabled(model.folder == nil)
                 Button("Clear") { model.entries.removeAll() }.disabled(model.entries.isEmpty)
                 Spacer()
-                Label(model.isWatching ? "Watching" : (model.isStarting ? "Starting" : "Idle"),
-                      systemImage: model.isWatching ? "eye.fill" : "eye.slash")
-                    .foregroundStyle(model.isWatching ? .green : .secondary)
+                if !model.isServiceInstalled {
+                    Label(model.isWatching ? "Watching" : (model.isStarting ? "Starting" : "Idle"),
+                          systemImage: model.isWatching ? "eye.fill" : "eye.slash")
+                        .foregroundStyle(model.isWatching ? .green : .secondary)
+                }
+            }
+            HStack {
+                Button(model.isServiceActionInProgress && !model.isServiceInstalled
+                       ? "Installing…" : "Install") {
+                    model.installService()
+                }
+                .disabled(model.isCheckingService || model.isServiceInstalled
+                          || model.isServiceActionInProgress || model.isStarting
+                          || model.folder == nil)
+                Button(model.isServiceActionInProgress && model.isServiceInstalled
+                       ? "Uninstalling…" : "Uninstall") {
+                    model.uninstallService()
+                }
+                .disabled(model.isCheckingService || !model.isServiceInstalled
+                          || model.isServiceActionInProgress)
+                if model.isCheckingService {
+                    ProgressView().controlSize(.small)
+                    Text("Checking service…").foregroundStyle(.secondary)
+                }
+                Spacer()
             }
             if let error = model.errorMessage {
                 Text(error).foregroundStyle(.red).font(.callout)
@@ -186,11 +297,22 @@ struct ContentView: View {
         }
         .padding()
         .frame(minWidth: 560, minHeight: 360)
+        .alert("Background Service Installed", isPresented: $model.showServiceInstalledAlert) {
+            Button("Close WatchFolder", role: .cancel) { NSApp.terminate(nil) }
+        } message: {
+            Text(model.serviceInstalledAlertMessage)
+        }
     }
 }
 
 final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
+        if let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"),
+           let icon = NSImage(contentsOf: iconURL) {
+            NSApplication.shared.applicationIconImage = icon
+        } else {
+            NSLog("WatchFolder: could not load AppIcon.icns from the app bundle.")
+        }
         UNUserNotificationCenter.current().delegate = self
     }
 

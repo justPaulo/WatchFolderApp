@@ -28,17 +28,24 @@ WatchFolder is a lightweight macOS app that periodically scans a folder and its 
 Clone the repository, then from its root:
 
 ```sh
-swift run WatchFolder
-```
-
-To assemble a standalone `WatchFolder.app` bundle:
-
-```sh
 ./build_app.sh
 open build/WatchFolder.app
 ```
 
-The script builds a release arm64 executable, assembles the app bundle, and ad-hoc signs it. It recreates `build/WatchFolder.app` when run.
+The packaged app loads `Resources/AppIcon.icns` as its application icon, which
+macOS uses for Notification Center notifications. Launch the rebuilt `.app`
+bundle this way; running the executable directly with `swift run WatchFolder`
+does not provide an app bundle icon and may show a generic notification icon.
+
+To run the executable directly for development (without the packaged app):
+
+```sh
+swift run WatchFolder
+```
+
+The build script compiles the app and background-service executables for arm64,
+assembles the app bundle with `Resources/AppIcon.icns`, and ad-hoc signs it. It
+recreates `build/WatchFolder.app` when run.
 
 ## Use
 
@@ -48,6 +55,13 @@ The script builds a release arm64 executable, assembles the app bundle, and ad-h
 4. Choose **Reveal Log** to open `watchfolder.log` in Finder (or open the folder if the log does not exist yet).
 
 Watching still works if notifications are unavailable or declined; the app displays a notice and continues logging events.
+
+Use **Install** to install a per-user LaunchAgent that immediately continues
+watching the selected folder after the app closes. The app asks for notification
+permission if needed and explains why it is closing before it exits. **Uninstall**
+stops and removes the service and its app copy. The service does not resume
+monitoring automatically at the next login. After logging in again, use
+**Uninstall** and then **Install** to start it again.
 
 ## Event log
 

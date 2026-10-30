@@ -9,6 +9,8 @@ let package = Package(
         .target(name: "WatchFolderCore"),
         // The GUI app.
         .executableTarget(name: "WatchFolder", dependencies: ["WatchFolderCore"]),
+        // Background process installed by the GUI app's LaunchAgent.
+        .executableTarget(name: "WatchFolderService", dependencies: ["WatchFolderCore"]),
         // XCTest replacement: `swift run SelfTests` (exit code 0 = pass).
         .executableTarget(name: "SelfTests", dependencies: ["WatchFolderCore"]),
     ]

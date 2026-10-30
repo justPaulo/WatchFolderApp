@@ -4,7 +4,7 @@
 <dict>
     <key>CFBundleName</key><string>WatchFolder</string>
     <key>CFBundleDisplayName</key><string>WatchFolder</string>
-    <key>CFBundleIdentifier</key><string>com.example.WatchFolder</string>
+    <key>CFBundleIdentifier</key><string>com.github.justpaulo.watchfolderapp</string>
     <key>CFBundleExecutable</key><string>WatchFolder</string>
     <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundlePackageType</key><string>APPL</string>

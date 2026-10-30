@@ -40,6 +40,26 @@
          "target": "SelfTests",
          "configuration": "release",
          "preLaunchTask": "swift: Build Release SelfTests"
+      },
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:WatchFolderApp}",
+         "name": "Debug WatchFolderService",
+         "target": "WatchFolderService",
+         "configuration": "debug",
+         "preLaunchTask": "swift: Build Debug WatchFolderService"
+      },
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:WatchFolderApp}",
+         "name": "Release WatchFolderService",
+         "target": "WatchFolderService",
+         "configuration": "release",
+         "preLaunchTask": "swift: Build Release WatchFolderService"
       }
    ]
 }
