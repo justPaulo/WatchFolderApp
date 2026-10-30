@@ -1,0 +1,45 @@
+{
+   "configurations": [
+      {},
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:WatchFolderApp}",
+         "name": "Debug WatchFolder",
+         "target": "WatchFolder",
+         "configuration": "debug",
+         "preLaunchTask": "swift: Build Debug WatchFolder"
+      },
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:WatchFolderApp}",
+         "name": "Release WatchFolder",
+         "target": "WatchFolder",
+         "configuration": "release",
+         "preLaunchTask": "swift: Build Release WatchFolder"
+      },
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:WatchFolderApp}",
+         "name": "Debug SelfTests",
+         "target": "SelfTests",
+         "configuration": "debug",
+         "preLaunchTask": "swift: Build Debug SelfTests"
+      },
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:WatchFolderApp}",
+         "name": "Release SelfTests",
+         "target": "SelfTests",
+         "configuration": "release",
+         "preLaunchTask": "swift: Build Release SelfTests"
+      }
+   ]
+}
