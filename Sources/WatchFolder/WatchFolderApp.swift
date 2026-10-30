@@ -249,6 +249,13 @@ final class WatchViewModel: ObservableObject {
 struct ContentView: View {
     @StateObject private var model = WatchViewModel()
 
+    private var appIcon: NSImage? {
+        guard let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "icns") else {
+            return nil
+        }
+        return NSImage(contentsOf: iconURL)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -258,6 +265,13 @@ struct ContentView: View {
                     .lineLimit(1).truncationMode(.middle)
                     .foregroundStyle(.secondary)
                 Spacer()
+                if let appIcon {
+                    Image(nsImage: appIcon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .accessibilityLabel("WatchFolder app icon")
+                }
             }
             HStack {
                 if model.isServiceInstalled {
