@@ -1,0 +1,570 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.SelfTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/SelfTests.build/sources",
+      "importPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/SelfTests/main.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/WatchFolderCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/SelfTests.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "SelfTests",
+      "moduleOutputPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/SelfTests.swiftmodule",
+      "objects" : [
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/SelfTests.build/main.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "SelfTests_main",
+        "-swift-version",
+        "5",
+        "-Xfrontend",
+        "-experimental-lazy-typecheck",
+        "-Xfrontend",
+        "-experimental-skip-all-function-bodies",
+        "-Xfrontend",
+        "-experimental-allow-module-with-compiler-errors",
+        "-Xfrontend",
+        "-empty-abi-descriptor",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "watchfolderapp"
+      ],
+      "outputFileMapPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/SelfTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/SelfTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : true,
+      "sources" : [
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/SelfTests/main.swift"
+      ],
+      "tempsPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/SelfTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.WatchFolder-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolder.build/sources",
+      "importPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolder/WatchFolderApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/WatchFolderCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolder.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "WatchFolder",
+      "moduleOutputPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/WatchFolder.swiftmodule",
+      "objects" : [
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolder.build/WatchFolderApp.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "WatchFolder_main",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-Xfrontend",
+        "-experimental-lazy-typecheck",
+        "-Xfrontend",
+        "-experimental-skip-all-function-bodies",
+        "-Xfrontend",
+        "-experimental-allow-module-with-compiler-errors",
+        "-Xfrontend",
+        "-empty-abi-descriptor",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "watchfolderapp"
+      ],
+      "outputFileMapPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolder.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/WatchFolder.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : true,
+      "sources" : [
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolder/WatchFolderApp.swift"
+      ],
+      "tempsPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolder.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.WatchFolderCore-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/sources",
+      "importPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FileTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FolderMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "WatchFolderCore",
+      "moduleOutputPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/WatchFolderCore.swiftmodule",
+      "objects" : [
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/FileTracker.swift.o",
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/FolderMonitor.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/include/WatchFolderCore-Swift.h",
+        "-swift-version",
+        "5",
+        "-Xfrontend",
+        "-experimental-lazy-typecheck",
+        "-Xfrontend",
+        "-experimental-skip-all-function-bodies",
+        "-Xfrontend",
+        "-experimental-allow-module-with-compiler-errors",
+        "-Xfrontend",
+        "-empty-abi-descriptor",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "watchfolderapp"
+      ],
+      "outputFileMapPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules/WatchFolderCore.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : true,
+      "sources" : [
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FileTracker.swift",
+        "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FolderMonitor.swift"
+      ],
+      "tempsPath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "SelfTests" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "SelfTests",
+      "-package-name",
+      "watchfolderapp",
+      "-c",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/SelfTests/main.swift",
+      "-I",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "SelfTests_main",
+      "-swift-version",
+      "5",
+      "-Xfrontend",
+      "-experimental-lazy-typecheck",
+      "-Xfrontend",
+      "-experimental-skip-all-function-bodies",
+      "-Xfrontend",
+      "-experimental-allow-module-with-compiler-errors",
+      "-Xfrontend",
+      "-empty-abi-descriptor",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "watchfolderapp",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ],
+    "WatchFolder" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "WatchFolder",
+      "-package-name",
+      "watchfolderapp",
+      "-c",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolder/WatchFolderApp.swift",
+      "-I",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "WatchFolder_main",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-Xfrontend",
+      "-experimental-lazy-typecheck",
+      "-Xfrontend",
+      "-experimental-skip-all-function-bodies",
+      "-Xfrontend",
+      "-experimental-allow-module-with-compiler-errors",
+      "-Xfrontend",
+      "-empty-abi-descriptor",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "watchfolderapp",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ],
+    "WatchFolderCore" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "WatchFolderCore",
+      "-package-name",
+      "watchfolderapp",
+      "-c",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FileTracker.swift",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FolderMonitor.swift",
+      "-I",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/include/WatchFolderCore-Swift.h",
+      "-swift-version",
+      "5",
+      "-Xfrontend",
+      "-experimental-lazy-typecheck",
+      "-Xfrontend",
+      "-experimental-skip-all-function-bodies",
+      "-Xfrontend",
+      "-experimental-allow-module-with-compiler-errors",
+      "-Xfrontend",
+      "-empty-abi-descriptor",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "watchfolderapp",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "SelfTests" : [
+      "WatchFolderCore"
+    ],
+    "WatchFolder" : [
+      "WatchFolderCore"
+    ],
+    "WatchFolderCore" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "default" : [
+      {
+
+      }
+    ]
+  },
+  "writeCommands" : {
+    "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/SelfTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/SelfTests/main.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/SelfTests.build/sources"
+    },
+    "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolder.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolder/WatchFolderApp.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolder.build/sources"
+    },
+    "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FileTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/pnascim/Projects/Swift/WatchFolderApp/Sources/WatchFolderCore/FolderMonitor.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/WatchFolderCore.build/sources"
+    },
+    "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/pnascim/Projects/Swift/WatchFolderApp/.build/index-build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+    }
+  }
+}
